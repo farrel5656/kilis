@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Duo Portfolio</title>
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #4a4e69;
+            --secondary: #9a8c98;
+            --accent: #c9ada7;
+            --light: #f2e9e4;
+            --dark: #22223b;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            margin: 0;
+            padding: 0;
+            transition: var(--transition);
+        }
+
+        .dark-mode {
+            background-color: var(--dark);
+            color: var(--light);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 0;
+            background-color: rgba(255, 255, 255, 0.9);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode header {
+            background-color: rgba(34, 34, 59, 0.9);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .dark-mode .logo {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .dark-mode .nav-links a {
+            color: var(--light);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .dark-mode .theme-toggle {
+            color: var(--light);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, var(--light) 0%, var(--accent) 100%);
+            padding: 2rem 0;
+        }
+
+        .dark-mode .hero {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--secondary) 100%);
+        }
+
+        .hero-content {
+            width: 100%;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .dark-mode .hero h1 {
+            color: var(--light);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: var(--primary);
+        }
+
+        .dark-mode .hero p {
+            color: var(--light);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 0;
+            background-color: white;
+        }
+
+        .dark-mode .about {
+            background-color: #2a2a40;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary);
+        }
+
+        .dark-mode .section-title {
+            color: var(--accent);
+        }
+
+        .profile-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .profile-card {
+            background-color: var(--light);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .dark-mode .profile-card {
+            background-color: #3a3a5a;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .profile-info {
+            padding: 1.5rem;
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .dark-mode .profile-name {
+            color: var(--accent);
+        }
+
+        .profile-role {
+            color: var(--secondary);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .profile-bio {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .dark-mode .profile-bio {
+            color: var(--light);
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            padding: 5rem 0;
+            background-color: var(--light);
+        }
+
+        .dark-mode .portfolio {
+            background-color: var(--dark);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .portfolio-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .portfolio-info {
+            padding: 1.5rem;
+            background-color: white;
+        }
+
+        .dark-mode .portfolio-info {
+            background-color: #3a3a5a;
+        }
+
+        .portfolio-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .dark-mode .portfolio-title {
+            color: var(--accent);
+        }
+
+        .portfolio-author {
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background-color: white;
+        }
+
+        .dark-mode .contact {
+            background-color: #2a2a40;
+        }
+
+        .contact-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem_;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        .dark-mode label {
+            color: var(--light);
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .dark-mode input,
+        .dark-mode textarea {
+            background-color: #3a3a5a;
+            border-color: #555;
+            color: var(--light);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .submit-btn:hover {
+            background-color: var(--secondary);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .dark-mode footer {
+            background-color: #1a1a2e;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">DuoCreative</div>
+                <div class="nav-links">
+                    <a href="#about">About</a>
+                    <a href="#portfolio">Portfolio</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <button class="theme-toggle">🌓</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>CUMA LATIHAN :)</h1>
+                  <h1>Duo Portfolio</h1>
+                <p>
+                    Don't let today's failures hinder your dreams for tomorrow.".</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <div class="profile-container">
+                <!-- First Profile -->
+                <div class="profile-card">
+                    <img src="exchel.jfif"
+                        alt="Portrait of a young female designer with short brown hair working on a tablet in a modern workspace"
+                        class="profile-img">
+                    <div class="profile-info">
+                        <h3 class="profile-name">Exchel igir</h3>
+                        <p class="profile-role">Programer</p>
+                        <p class="profile-bio">
+                            Don't let today's failures hinder your dreams for tomorrow."
+                        </p>
+                        <a href="#sarah-portfolio" class="btn">View Portfolio</a>
+                    </div>
+                </div>
+
+                <!-- Second Profile -->
+                <div class="profile-card">
+                    <img src="keren.jfif"
+                        alt="Portrait of a male developer coding on a laptop in a cozy home office with plants"
+                        class="profile-img">
+                    <div class="profile-info">
+                        <h3 class="profile-name">Keren Toreh</h3>
+                        <p class="profile-role">health services</p>
+                        <p class="profile-bio">
+                            Appreciate yourself for who you are. True beauty shines from within, not from outward appearances.
+                        </p>
+                        <a href="#mark-portfolio" class="btn">View Portfolio</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <h2 class="section-title">Our Work</h2>
+
+            <div class="portfolio-grid">
+                <!-- Sarah's Projects -->
+                <div class="portfolio-item" id="sarah-portfolio">
+                    <img src="gambar el.jfif"
+                        alt="Mobile app interface design showing a wellness tracking application with soft colors and clean typography"
+                        class="portfolio-img">
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Work</h3>
+                        <p class="portfolio-author">Still at school</p>
+                    </div>
+                </div>
+
+                <!-- Mark's Projects -->
+                <div class="portfolio-item" id="mark-portfolio">
+                    <img src="gambar keren.jfif"
+                        alt="Screenshot of a React e-commerce application showing product listings and shopping cart functionality"
+                        class="portfolio-img">
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Work</h3>
+                        <p class="portfolio-author">Still at school</p>
+                    </div>
+                </div>
+                <!-- Contact Section -->
+                <section class="contact" id="contact">
+                    <div class="container">
+                        <h2 class="section-title">Get In Touch</h2>
+                        <div class="contact-container">
+                            <form class="contact-form">
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" id="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="subject">Subject</label>
+                                    <input type="text" id="subject" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="message">Message</label>
+                                    <textarea id="message" required></textarea>
+                                </div>
+                                <button type="submit" class="submit-btn">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Footer -->
+                <footer>
+                    <div class="container">
+                        <p>&copy; 2025 DuoCreative. All rights reserved.</p>
+                        <div class="social-links">
+                            <a href="#" aria-label="Instagram">📸</a>
+                            <a href="#" aria-label="LinkedIn">💼</a>
+                            <a href="#" aria-label="Dribbble">🏀</a>
+                            <a href="#" aria-label="GitHub">🐱</a>
+                        </div>
+                    </div>
+                </footer>
+
+                <script>
+                    // Dark/Light Mode Toggle
+                    const themeToggle = document.querySelector('.theme-toggle');
+                    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+                    // Check for saved user preference or use OS setting
+                    const currentTheme = localStorage.getItem('theme');
+                    if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+                        document.body.classList.add('dark-mode');
+                    }
+
+                    themeToggle.addEventListener('click', () => {
+                        document.body.classList.toggle('dark-mode');
+                        const theme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+                        localStorage.setItem('theme', theme);
+                    });
+
+                    // Smooth scrolling for anchor links
+                    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                        anchor.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        });
+                    });
+                </script>
+</body>
+
+</html>
